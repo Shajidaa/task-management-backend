@@ -7,6 +7,7 @@ dotenv.config({
 
 const config = {
   connection_string: process.env.CONNECTION_STRING as string,
+  ssl: process.env.SSL === "true",
   port: process.env.PORT as string,
 };
 
