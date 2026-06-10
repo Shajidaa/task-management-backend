@@ -8,11 +8,6 @@ export const pool = new Pool({
 
 export const initDB = async () => {
   try {
-    // -- Enums for Type Safety
-    // await pool.query(`
-    //   CREATE TYPE user_role AS ENUM ('Admin', 'Project Manager', 'Team Member');
-    // `);
-
     // -- 1. Users Table
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
@@ -26,8 +21,6 @@ export const initDB = async () => {
     `);
     console.log("Database connected successfully!");
   } catch (error) {
-    // console.log(error);
-    // const err = error as Error;
     console.error("CRITICAL DB ERROR:", error);
     throw new AppError(500, "Database connection failed");
   }
