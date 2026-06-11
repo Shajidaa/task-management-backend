@@ -5,10 +5,16 @@ const createUser = async (req: Request, res: Response) => {
   try {
     const result = await userService.registerUser(req.body);
 
-    res.status(201).json(result);
+    res.status(201).json({
+      success: true,
+      message: "User created successfully!",
+      data: result.rows[0],
+    });
   } catch (error) {
-    console.error("Error in signUp:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({
+      success: false,
+      message: "Internal service error",
+    });
   }
 };
 
