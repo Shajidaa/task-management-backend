@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import { userService } from "./user.service";
+import sendResponse from "../../utility/sendResponse";
 
 const createUser = async (req: Request, res: Response) => {
   try {
@@ -22,9 +23,10 @@ const getUsers = async (req: Request, res: Response) => {
   try {
     const result = await userService.getAllUser();
 
-    res.status(201).json({
+    sendResponse(res, {
+      statusCode: 200,
       success: true,
-      message: "Get all users successfully",
+      message: "Users fetched successfully",
       data: result.rows,
     });
   } catch (error) {
