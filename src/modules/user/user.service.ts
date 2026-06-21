@@ -10,6 +10,15 @@ export const registerUser = async (payload: IUser) => {
       "Missing required fields: name, email, and password are required.",
     );
   }
+  // const userExist = await pool.query(
+  //   `
+  // SELECT id FORM users WHERE email=$1
+  // `,
+  //   [email],
+  // );
+  // if (userExist.rows.length > 0) {
+  //   throw new Error(`This email already exist`);
+  // }
 
   const hash_password = await bcrypt.hash(password, 10);
   const result = await pool.query(

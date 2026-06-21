@@ -15,7 +15,7 @@ export const initDB = async () => {
         name VARCHAR(100) NOT NULL,
         email VARCHAR(100) UNIQUE NOT NULL,
         password VARCHAR(255) NOT NULL,
-    role user_role NOT NULL DEFAULT 'Team Member',
+    role user_role  NOT NULL DEFAULT 'Team Member',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
    );
     `);

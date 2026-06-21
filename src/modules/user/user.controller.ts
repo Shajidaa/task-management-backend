@@ -5,6 +5,7 @@ import sendResponse from "../../utility/sendResponse";
 const createUser = async (req: Request, res: Response) => {
   try {
     const result = await userService.registerUser(req.body);
+    // console.log(result);
 
     sendResponse(res, {
       statusCode: 200,
