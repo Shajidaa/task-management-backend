@@ -9,6 +9,8 @@ const config = {
   connection_string: process.env.CONNECTION_STRING as string,
   ssl: process.env.SSL === "true",
   port: process.env.PORT as string,
+  secret: process.env.SECRET as string,
+  jwt_access_expires_in: process.env.EXPIRES as string,
 };
 
 export default config;
