@@ -37,9 +37,13 @@ const loginUserFromDB = async (payload: {
     );
   }
   const accessToken = jwt.sign(jwtPayload, config.secret, {
-    expiresIn: config.jwt_access_expires_in || ("1d" as any),
+    expiresIn: config.jwt_access_expires_in as any,
   });
-  return accessToken;
+  //refresh token
+  const refreshToken = jwt.sign(jwtPayload, config.jwt_refresh_secret, {
+    expiresIn: config.jwt_refresh_expires_in as any,
+  });
+  return { accessToken, safeUser, refreshToken };
 };
 export const authService = {
   loginUserFromDB,
