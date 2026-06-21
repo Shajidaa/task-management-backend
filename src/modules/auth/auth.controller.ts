@@ -29,6 +29,18 @@ const loginUser = async (req: Request, res: Response) => {
   }
 };
 
+const generateRefreshToken = async (req: Request, res: Response) => {
+  const result = await authService.generateRefreshTokenFromDB(
+    req.cookies.refreshToken,
+  );
+  sendResponse(res, {
+    statusCode: 201,
+    success: true,
+    message: "User Login successfully!",
+    data: result,
+  });
+};
 export const authController = {
   loginUser,
+  generateRefreshToken,
 };

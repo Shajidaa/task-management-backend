@@ -45,6 +45,30 @@ const loginUserFromDB = async (payload: {
   });
   return { accessToken, safeUser, refreshToken };
 };
+const generateRefreshTokenFromDB = async (token: string) => {
+  if (!token) {
+    throw new AppError(401, "You are not authorized!");
+  }
+
+  const decoded = jwt.verify(token, config.jwt_refresh_secret) as JwtPayload;
+
+  const { id, name, email, role } = decoded;
+  const jwtPayload = { id, name, email, role } as JwtPayload;
+  const userData = await pool.query(`SELECT * FROM users WHERE email=$1`, [
+    email,
+  ]);
+  if (!userData) {
+    throw new AppError(401, "User not found!!");
+  }
+  const accessToken = jwt.sign(jwtPayload, config.secret, {
+    expiresIn: config.jwt_access_expires_in as any,
+  });
+
+  return {
+    accessToken,
+  };
+};
 export const authService = {
   loginUserFromDB,
+  generateRefreshTokenFromDB,
 };
